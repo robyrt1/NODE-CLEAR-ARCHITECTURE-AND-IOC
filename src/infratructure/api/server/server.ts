@@ -17,7 +17,9 @@ app.setConfig((app) => {
 
 
 const server = app.build();
+const portServer = Number(process.env.PORT);
 
-server.listen(3000,()=>{
-    console.log("[INFO] - Server connection successfully performed, port: 3000.")
+const serverRun = server.listen(portServer,()=>{
+  const address: any= serverRun.address();
+  console.log(`[INFO] - Server connection: http://${address.address}:${address.port}`);
 })

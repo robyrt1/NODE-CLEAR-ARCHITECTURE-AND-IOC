@@ -3,7 +3,7 @@ import { JWT_IOC_IDS } from '../../../infratructure/@shared/constants/jwt.ioc.id
 import { IJwt } from '../../../domain/@shared/jwt/jwt.interface';
 import { ICheckCredentialsUsecaseInputDto, ICheckCredentialsUsecaseOutputDto } from './checkCredentials.usecase.dto';
 import { USERS_IOC_IDS } from '../../../infratructure/@shared/constants/IOC/users.ioc.identifiers';
-import { IFindByNameUseCase } from '../../user/findByName/findByName.usecase';
+import { IUsersFindByNameUseCase } from '../../user/findByName/findByName.usecase';
 import { CryptographyShared } from '../../../infratructure/@shared/cryptography/cryptography.shared';
 import { head } from 'lodash';
 
@@ -11,7 +11,7 @@ import { head } from 'lodash';
 export class CheckCredentialsUsecase implements ICheckCredentialsUsecase {
   constructor(
     @inject(JWT_IOC_IDS.JWT) private jwtShared: IJwt,
-    @inject(USERS_IOC_IDS.USECASE.FINDBYNAMES) private findByUseCase: IFindByNameUseCase,
+    @inject(USERS_IOC_IDS.USECASE.FINDBYNAMES) private findByUseCase: IUsersFindByNameUseCase,
   ) {}
 
   async execute({
