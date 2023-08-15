@@ -1,5 +1,4 @@
 import { Container } from 'inversify'
-// import usersServicesBinding from './users.services.bindings'
 import usersRepositoriesBindings from './users.repositories.bindings'
 import { flow } from 'lodash'
 import usersUsecasesBindings from './users.usecases.bindings'

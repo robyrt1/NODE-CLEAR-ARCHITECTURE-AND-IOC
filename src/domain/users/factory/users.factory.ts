@@ -1,6 +1,5 @@
 import { DATABASE_IOC_IDS } from "./../../../infratructure/@shared/constants/databaseI.ioc.identifiers";
 import { inject, injectable } from "inversify";
-import { CryptographyShared } from "../../../infratructure/@shared/cryptography/cryptography.shared";
 import { IUsers, Users } from "./../entity/user.entity";
 import { IDatabase } from "../../../infratructure/@shared/interfaces/database";
 

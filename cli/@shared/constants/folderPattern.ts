@@ -1,0 +1,1 @@
+export const folderPattern = ['entity','factory','repository','validator']; 

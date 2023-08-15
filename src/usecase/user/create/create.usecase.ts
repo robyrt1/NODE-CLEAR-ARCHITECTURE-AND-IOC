@@ -5,7 +5,7 @@ import { ICreateUseCaseInputDto, ICreateUseCaseOutputDto } from "./create.usecas
 import { IUsersFactory } from "../../../domain/users/factory/users.factory";
 
 @injectable()
-export class CreateUseCase implements ICreateUseCase {
+export class UsersCreateUseCase implements IUsersCreateUseCase {
   constructor(
     @inject(USERS_IOC_IDS.REPOSITORY)
     private usersRepository: IUserRepositoryInterface,
@@ -32,6 +32,6 @@ export class CreateUseCase implements ICreateUseCase {
   }
 }
 
-export interface ICreateUseCase {
+export interface IUsersCreateUseCase {
   execute(param: ICreateUseCaseInputDto): Promise<ICreateUseCaseOutputDto>;
 }
