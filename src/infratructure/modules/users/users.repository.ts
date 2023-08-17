@@ -14,32 +14,32 @@ export class UsersRepository implements IUserRepositoryInterface {
     nr_sequencia as id,
     nm_usuario,
     ds_usuario,
-    ds_senha,
-    cd_pessoa_fisica
-from manager.ger_func_usuario 
+    ds_senha
+    from manager.ger_usuario 
 where  nm_usuario in ($1)`,
       [name],
     );
 
     const result = get(users, 'rows', []);
+    console.log("🚀 ~ file: users.repository.ts:24 ~ UsersRepository ~ findByName ~ result:", result)
     return result[0] as IUsers;
   }
   async create({ id, nm_usuario, ds_usuario, cd_pessoa_fisica }: IUsers): Promise<void> {
-    const newUser = await this.database.execQuery(
+    await this.database.execQuery(
       `
-      insert into manager.ger_func_usuario (nr_sequencia,nm_usuario,ds_usuario,cd_pessoa_fisica)
-      values($1,$2,$3,$4)
+      insert into manager.ger_usuario (nr_sequencia,nm_usuario,ds_usuario)
+      values($1,$2,$3,)
     `,
-      [id, nm_usuario, ds_usuario, cd_pessoa_fisica],
+      [id, nm_usuario, ds_usuario],
     );
   }
   async update(id: number, { nm_usuario, ds_usuario }: Partial<IUsers>): Promise<void> {
-    const sql = `update manager.ger_func_usuario set nm_usuario = $1,ds_usuario = $2
+    const sql = `update manager.ger_usuario set nm_usuario = $1,ds_usuario = $2
     where nr_sequencia = $3`;
     await this.database.execQuery(sql, [nm_usuario, ds_usuario, id]);
   }
   async patch(id: number, { ds_senha }: Partial<IUsers>): Promise<void> {
-    const sql = `update manager.ger_func_usuario set ds_senha = $1
+    const sql = `update manager.ger_usuario set ds_senha = $1
     where nr_sequencia = $2`;
     await this.database.execQuery(sql, [ds_senha, id]);
   }
@@ -51,9 +51,8 @@ where  nm_usuario in ($1)`,
       nr_sequencia as id,
         nm_usuario,
         ds_usuario,
-        ds_senha,
-        cd_pessoa_fisica
-    from manager.ger_func_usuario`);
+        ds_senha
+    from manager.ger_usuario`);
 
     const result = get(users, 'rows', []);
     return result as IUsers[];
@@ -66,7 +65,7 @@ where  nm_usuario in ($1)`,
       ds_usuario,
       ds_senha,
       cd_pessoa_fisica
-    from manager.ger_func_usuario 
+    from manager.ger_usuario 
     where  ${prop} in ($1) `;
     const user = await this.database.execQuery(sql, value);
 

@@ -1,5 +1,5 @@
+import { Imapper } from './../../@shared/interfaces/mapper.interface';
 import { map } from 'lodash';
-import { Imapper } from '../../@shared/interfaces/mapper.interface';
 import { IUsers } from '../entity/user.entity';
 
 export class UsersMapper implements Imapper<IUsers[], IUsers[]> {
