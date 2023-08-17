@@ -6,20 +6,17 @@ export class Users extends Entity implements IUsers {
   nm_usuario: string;
   ds_usuario: string;
   ds_senha: string;
-  cd_pessoa_fisica: string;
 
   constructor(
     id: string | number,
     nm_usuario: string,
     ds_usuario: string,
-    cd_pessoa_fisica: string,
     ds_senha?: string,
   ) {
     super();
     this.id = id;
     this.nm_usuario = nm_usuario;
     this.ds_usuario = ds_usuario;
-    this.cd_pessoa_fisica = cd_pessoa_fisica;
     this.ds_senha = ds_senha;
     this.validate();
     if (this.notification.hasErrors()) {
@@ -37,5 +34,4 @@ export interface IUsers {
   nm_usuario: string;
   ds_usuario: string;
   ds_senha: string;
-  cd_pessoa_fisica: string;
 }

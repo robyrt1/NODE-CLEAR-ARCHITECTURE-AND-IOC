@@ -7,5 +7,4 @@ export interface IUsersPatchUseCaseOutputDto {
   id: string | number;
   ds_usuario: string;
   nm_usuario: string;
-  cd_pessoa_fisica: string;
 }
