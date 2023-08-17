@@ -24,17 +24,17 @@ export class Database implements IDatabase {
     public connect() {
         if (!this.getConnection()) {
             const dbConfig = {
-                user: process.env.PG_USER,
-                host: process.env.PG_HOST,
-                database: process.env.PG_DATABASE,
-                password: process.env.PG_PASSWORD,
-                port: parseInt(process.env.PG_PORT, 10),
+                user: process.env.POSTGRES_USER,
+                host: process.env.POSTGRES_HOST,
+                database: process.env.POSTGRES_DB,
+                password: process.env.POSTGRES_PASSWORD,
+                port: parseInt(process.env.POSTGRES_PORT, 10),
                 max: 10,
             };
 
-            this.connection = new Pool(dbConfig);
-            console.log('[INFO] - Database is connected');
+            this.connection = new Pool(dbConfig)
         }
+        console.log('[INFO] - Database is connected');
     }
 
     public getConnection(): Pool {
@@ -44,11 +44,11 @@ export class Database implements IDatabase {
     public async connectAsync() {
         if (!this.getConnection()) {
             const dbConfig = {
-                user: process.env.PG_USER,
-                host: process.env.PG_HOST,
-                database: process.env.PG_DATABASE,
-                password: process.env.PG_PASSWORD,
-                port: parseInt(process.env.PG_PORT, 10),
+                user: process.env.POSTGRES_USER,
+                host: process.env.POSTGRES_HOST,
+                database: process.env.POSTGRES_DB,
+                password: process.env.POSTGRES_PASSWORD,
+                port: parseInt(process.env.POSTGRES_PORT, 10),
             };
 
             try {
