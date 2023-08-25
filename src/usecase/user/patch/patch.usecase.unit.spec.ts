@@ -83,6 +83,8 @@ describe("FEATURE - Use case", ()=>{
           expect(sut.statusCode).toBe(expectedUser.statusCode)
           expect(sut).toHaveProperty('message')
           expect(sut.message).toBe(expectedUser.message)
+          expect(getByPropSpy).toBeCalled()
+          expect(getByPropSpy).toBeCalledWith('nr_sequencia', [input.id as never])
         }
 
 
