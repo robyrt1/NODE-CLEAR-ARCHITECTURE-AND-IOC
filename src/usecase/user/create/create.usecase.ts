@@ -17,7 +17,6 @@ export class UsersCreateUseCase implements IUsersCreateUseCase {
     const user = await this.usersFactory.create(
       param.nm_usuario,
       param.ds_usuario,
-      param.cd_pessoa_fisica
     );
 
     await this.usersRepository.create(user);
@@ -27,7 +26,6 @@ export class UsersCreateUseCase implements IUsersCreateUseCase {
       nm_usuario: param.nm_usuario,
       ds_usuario: param.ds_usuario,
       ds_senha: user.ds_senha,
-      cd_pessoa_fisica: param.cd_pessoa_fisica,
     };
   }
 }

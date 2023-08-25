@@ -40,6 +40,7 @@ export class UsersServices implements IUsersServices {
 
       return httpResponseMappingHandler(true, 'Sucesso ao salvar usuarios.', newUser, HTTPCODE.CREATED, 'sucess');
     } catch (error) {
+      console.log("🚀 ~ file: users.services.ts:43 ~ UsersServices ~ create ~ error:", error)
       return httpResponseMappingHandlerError(error as Error);
     }
   }

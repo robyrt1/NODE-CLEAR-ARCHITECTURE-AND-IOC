@@ -24,10 +24,9 @@ export class UsersPatchUseCase implements IUsersPatchUseCase {
 
     if (!shouldNotUser) throw { statusCode: HTTPCODE.BAD_REQUEST, message: 'Usuario não existe.' };
 
-    const nmUsuario = defaultTo(nm_usuario_request, shouldUser.ds_usuario);
     const dsSenha = defaultTo(CryptographyShared.hash(ds_senha_request), shouldUser.ds_senha);
 
-    const dataUpdate = new Users(id, nmUsuario, shouldUser.ds_usuario, shouldUser.cd_pessoa_fisica, dsSenha);
+    const dataUpdate = new Users(id, shouldUser.nm_usuario, shouldUser.ds_usuario, dsSenha);
 
     await this.usersRepository.patch(Number(id), dataUpdate);
 
@@ -35,7 +34,6 @@ export class UsersPatchUseCase implements IUsersPatchUseCase {
       id,
       nm_usuario: dataUpdate.nm_usuario,
       ds_usuario: dataUpdate.ds_usuario,
-      cd_pessoa_fisica: shouldUser.cd_pessoa_fisica,
     };
   }
 }

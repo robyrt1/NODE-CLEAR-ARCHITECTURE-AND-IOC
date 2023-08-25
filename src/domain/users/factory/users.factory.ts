@@ -11,7 +11,6 @@ export default class UsersFactory implements IUsersFactory {
   public async create(
     nm_usuario: string,
     ds_usuario: string,
-    cd_pessoa_fisica: string
   ): Promise<IUsers> {
     const sequence = await this.database.execQuery(`
       select nextval('manager.ger_func_usuario_seq') as id
@@ -21,7 +20,6 @@ export default class UsersFactory implements IUsersFactory {
       sequence.rows[0].id,
       nm_usuario,
       ds_usuario,
-      cd_pessoa_fisica
     );
 
     return {
@@ -29,7 +27,6 @@ export default class UsersFactory implements IUsersFactory {
       nm_usuario: user.nm_usuario,
       ds_usuario: user.ds_usuario,
       ds_senha: user.ds_senha,
-      cd_pessoa_fisica: user.cd_pessoa_fisica,
     };
   }
 }
@@ -38,6 +35,5 @@ export interface IUsersFactory {
   create(
     nm_usuario: string,
     ds_usuario: string,
-    cd_pessoa_fisica: string
   ): Promise<IUsers>;
 }

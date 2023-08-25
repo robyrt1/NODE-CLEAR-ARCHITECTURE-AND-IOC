@@ -4,5 +4,7 @@
     "endOfLine": "lf",
     "tabWidth": 2,
     "arrowParens": "avoid",
-    "printWidth": 120
+    "printWidth": 120,
+    "requirePragma": true,
+    "proseWrap": "always"
 }

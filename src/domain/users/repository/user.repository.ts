@@ -4,4 +4,5 @@ import { RepositoryInterface } from "../../@shared/repository/repository.interfa
 export interface IUserRepositoryInterface
   extends Partial<RepositoryInterface<IUsers>> {
     findByName(name:string):Promise<IUsers>
+    
   }
