@@ -18,7 +18,6 @@ export class UsersFindByNameUseCase {
       nm_usuario: users.nm_usuario,
       ds_usuario: users.ds_usuario,
       ds_senha: users.ds_senha,
-      cd_pessoa_fisica: users.cd_pessoa_fisica,
     };
   }
 }
