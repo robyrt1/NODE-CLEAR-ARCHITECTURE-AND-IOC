@@ -18,7 +18,6 @@ export class UsersCreateUseCase implements IUsersCreateUseCase {
       param.nm_usuario,
       param.ds_usuario,
     );
-    console.log("🚀 ~ file: create.usecase.ts:21 ~ UsersCreateUseCase ~ execute ~ user:", user)
 
     await this.usersRepository.create(user);
 
