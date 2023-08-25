@@ -1,4 +1,5 @@
-import { get } from 'lodash';
+import { response } from 'inversify-express-utils';
+import { get, head } from 'lodash';
 import { IUsers } from '../../../domain/users/entity/user.entity';
 import { IUserRepositoryInterface } from '../../../domain/users/repository/user.repository';
 import { DATABASE_IOC_IDS } from '../../@shared/constants/databaseI.ioc.identifiers';
@@ -63,7 +64,7 @@ where  nm_usuario in ($1)`,
     return result as IUsers[];
   }
   
-  async getByProp(prop: string, value: string[] | number[]): Promise<IUsers> {
+  async getByProp(prop: string, value: string[] | number[]): Promise<IUsers | null> {
     const sql = `
     select 
       nr_sequencia as id,
@@ -73,6 +74,13 @@ where  nm_usuario in ($1)`,
       from manager.ger_usuario 
     where  ${prop} in ($1) `;
     const user = await this.database.execQuery(sql, value);
+
+    const dataResponse = get(user, 'rows',[]);
+    const shouldNotUser = !!head(dataResponse);
+
+    if(!shouldNotUser) {
+      return null
+    }
 
     return {
       id: user.rows[0].id,
