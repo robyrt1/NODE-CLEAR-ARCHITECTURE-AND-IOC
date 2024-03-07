@@ -13,12 +13,12 @@ export class UsersRepository implements IUserRepositoryInterface {
   async findByName(name: string): Promise<IUsers> {
     const users = await this.database.execQuery(
       `select 
-    nr_sequencia as id,
-    nm_usuario,
-    ds_usuario,
-    ds_senha
-    from manager.ger_usuario 
-where  nm_usuario in ($1)`,
+    id,
+    user_name,
+    surname,
+    password
+    from manager.users 
+where  user_name in ($1)`,
       [name],
     );
 
@@ -26,26 +26,26 @@ where  nm_usuario in ($1)`,
     return result[0] as IUsers;
   }
 
-  async create({ id, nm_usuario, ds_usuario }: IUsers): Promise<void> {
+  async create({ id, user_name, sunname,password }: IUsers): Promise<void> {
     await this.database.execQuery(
       `
-      insert into manager.ger_usuario (nr_sequencia,nm_usuario,ds_usuario)
+      insert into manager.users (user_name,surname,password)
       values($1,$2,$3)
     `,
-      [id, nm_usuario, ds_usuario],
+      [user_name, sunname,password],
     );
   }
 
-  async update(id: number, { nm_usuario, ds_usuario }: Partial<IUsers>): Promise<void> {
+  async update(id: number, { user_name, sunname }: Partial<IUsers>): Promise<void> {
     const sql = `update manager.ger_usuario set nm_usuario = $1,ds_usuario = $2
     where nr_sequencia = $3`;
-    await this.database.execQuery(sql, [nm_usuario, ds_usuario, id]);
+    await this.database.execQuery(sql, [user_name, sunname, id]);
   }
 
-  async patch(id: number, { ds_senha }: Partial<IUsers>): Promise<void> {
+  async patch(id: number, { password }: Partial<IUsers>): Promise<void> {
     const sql = `update manager.ger_usuario set ds_senha = $1
     where nr_sequencia = $2`;
-    await this.database.execQuery(sql, [ds_senha, id]);
+    await this.database.execQuery(sql, [password, id]);
   }
 
   getById?(id: number): Promise<IUsers> {
@@ -54,11 +54,11 @@ where  nm_usuario in ($1)`,
 
   async getAll?(): Promise<IUsers[]> {
     const users = await this.database.execQuery(`select 
-      nr_sequencia as id,
-        nm_usuario,
-        ds_usuario,
-        ds_senha
-    from manager.ger_usuario`);
+        id,
+        user_name,
+        surname,
+        password
+    from manager.users`);
 
     const result = get(users, 'rows', []);
     return result as IUsers[];
@@ -67,11 +67,11 @@ where  nm_usuario in ($1)`,
   async getByProp(prop: string, value: string[] | number[]): Promise<IUsers | null> {
     const sql = `
     select 
-      nr_sequencia as id,
-      nm_usuario,
-      ds_usuario,
-      ds_senha
-      from manager.ger_usuario 
+      id,
+      user_name,
+      sunname,
+      passaword
+      from manager.users 
     where  ${prop} in ($1) `;
     const user = await this.database.execQuery(sql, value);
 
@@ -84,9 +84,9 @@ where  nm_usuario in ($1)`,
 
     return {
       id: user.rows[0].id,
-      nm_usuario: user.rows[0].nm_usuario,
-      ds_usuario: user.rows[0].ds_usuario,
-      ds_senha: user.rows[0].ds_senha,
+      user_name: user.rows[0].user_name,
+      sunname: user.rows[0].sunname,
+      password: user.rows[0].password,
     };
   }
 }

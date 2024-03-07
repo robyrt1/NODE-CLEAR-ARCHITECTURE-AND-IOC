@@ -15,24 +15,23 @@ export class CheckCredentialsUsecase implements ICheckCredentialsUsecase {
   ) {}
 
   async execute({
-    ds_usuario,
-    ds_senha: passwordRequest,
+    user_name,
+    password: passwordRequest,
   }: ICheckCredentialsUsecaseInputDto): Promise<ICheckCredentialsUsecaseOutputDto> {
-    const user = await this.findByUseCase.execute({ name: ds_usuario });
+    const user = await this.findByUseCase.execute({ name: user_name });
     const shouldNotUser = !!head([user]);
 
     if (!shouldNotUser) throw new Error('Usuário/Senha incorretos!');
 
-    const { ds_senha, ...userDataToGenerateJWTtoken } = user;
+    const { password, ...userDataToGenerateJWTtoken } = user;
 
-    const isValidatePassword = await CryptographyShared.compare(passwordRequest, ds_senha);
+    const isValidatePassword = await CryptographyShared.compare(passwordRequest, password);
 
     if (!isValidatePassword) throw new Error(`Credenciais erradas`);
 
     const token = this.jwtShared.genereted(userDataToGenerateJWTtoken);
 
     const data = { user: userDataToGenerateJWTtoken, token };
-    console.log('🚀 ~ file: checkCredentials.usecase.ts:36 ~ CheckCredentialsUsecase ~ token:', token);
 
     return data;
   }

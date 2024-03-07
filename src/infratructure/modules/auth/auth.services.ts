@@ -5,7 +5,7 @@ import { httpResponseMappingHandler } from '../../@shared/httpResponse/httpRespo
 import { HTTPCODE } from '../../@shared/constants/httpCode';
 import { get } from 'lodash';
 export interface IAuthService {
-  checkCredentials(ds_usuario: string, ds_senha: string): Promise<any>;
+  checkCredentials(user_name: string, passaword: string): Promise<any>;
 }
 
 @injectable()
@@ -14,12 +14,12 @@ export class AuthService implements IAuthService {
     @inject(AUTH_IOC_IDS.USECASE.CHECKCREDENTIALSUSECASE) private checkCredentialsUsecase: ICheckCredentialsUsecase,
   ) {}
 
-  async checkCredentials(ds_usuario: string, ds_senha: string) {
+  async checkCredentials(user_name: string, password: string) {
     try {
-      const result = await this.checkCredentialsUsecase.execute({ ds_usuario, ds_senha });
+      const result = await this.checkCredentialsUsecase.execute({ user_name, password });
       return httpResponseMappingHandler(true, 'Sucesso na logar.', result, HTTPCODE.OK, 'sucess');
     } catch (error) {
-      console.log(error)
+      console.log("🚀 ~ AuthService ~ checkCredentials ~ error:", error)
       const messageFail = get(error, 'message', error) as any;
       const statusCode = get(error, 'statusCode', HTTPCODE.INTERNAL_SERVER_ERROR);
       return httpResponseMappingHandler(false, messageFail, [], statusCode, 'fail');

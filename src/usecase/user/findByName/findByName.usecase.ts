@@ -15,9 +15,9 @@ export class UsersFindByNameUseCase {
 
     return {
       id: users.id,
-      nm_usuario: users.nm_usuario,
-      ds_usuario: users.ds_usuario,
-      ds_senha: users.ds_senha,
+      user_name: users.user_name,
+      sunname: users.sunname,
+      password: users.password,
     };
   }
 }

@@ -3,21 +3,21 @@ import NotificationError from '../../@shared/notification/notification.error';
 import UsersValidatorFactory from '../factory/users.validator.factory';
 
 export class Users extends Entity implements IUsers {
-  nm_usuario: string;
-  ds_usuario: string;
-  ds_senha: string;
+  user_name: string;
+  sunname: string;
+  password: string;
 
   constructor(
     id: string | number,
-    nm_usuario: string,
-    ds_usuario: string,
-    ds_senha?: string,
+    user_name: string,
+    sunname: string,
+    password?: string,
   ) {
     super();
     this.id = id;
-    this.nm_usuario = nm_usuario;
-    this.ds_usuario = ds_usuario;
-    this.ds_senha = ds_senha;
+    this.user_name = user_name;
+    this.sunname = sunname;
+    this.password = password;
     this.validate();
     if (this.notification.hasErrors()) {
       throw new NotificationError(this.notification.getErrors());
@@ -31,7 +31,7 @@ export class Users extends Entity implements IUsers {
 
 export interface IUsers {
   id: string | number;
-  nm_usuario: string;
-  ds_usuario: string;
-  ds_senha: string;
+  user_name: string;
+  sunname: string;
+  password: string;
 }

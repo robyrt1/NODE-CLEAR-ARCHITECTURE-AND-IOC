@@ -3,6 +3,8 @@ import sha1 from "sha1";
 
 export class CryptographyShared {
    static compare(passaworFromRequest: string, passwordHash: string) {
+    console.log("🚀 ~ CryptographyShared ~ compare ~ passwordHash:", passwordHash)
+    console.log("🚀 ~ CryptographyShared ~ compare ~ passaworFromRequest:", passaworFromRequest)
     try {
       const result = passaworFromRequest === passwordHash ? true : false;
       return result;

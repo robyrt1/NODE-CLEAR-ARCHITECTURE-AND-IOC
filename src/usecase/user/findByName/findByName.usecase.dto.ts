@@ -5,7 +5,7 @@ export interface IFindByNameUseCaseInputDto {
 
 export interface IFindByNameUseCaseCaseOutputDto{
     id: string | number,
-    nm_usuario: string,
-    ds_usuario: string,
-    ds_senha: string
+    user_name: string,
+    sunname: string,
+    password: string
 }

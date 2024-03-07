@@ -4,18 +4,24 @@ import { Response, Request, NextFunction } from 'express';
 import { inject } from 'inversify';
 import { AUTH_IOC_IDS } from '../../../@shared/constants/IOC/auth.ioc.identifiers';
 import { get } from 'lodash';
+import { HTTPCODE } from '../../../@shared/constants/httpCode';
 
-@controller('/auth')
+@controller('/api/auth')
 export class AuthController {
   constructor(
     @inject(AUTH_IOC_IDS.SERVICE)
     private readonly authServices: IAuthService,
   ) {}
-  @httpPost('/')
-  async getAll(@request() req: Request, @response() res: Response, @next() next: NextFunction) {
-    const ds_usuario = get(req.body, 'ds_usuario', null);
-    const ds_senha = get(req.body, 'ds_senha', null);
-    const users = await this.authServices.checkCredentials(ds_usuario, ds_senha);
+  @httpPost('/signin')
+  async signin(@request() req: Request, @response() res: Response, @next() next: NextFunction) {
+    const user_name = get(req.body, 'user_name', null);
+    const password = get(req.body, 'password', null);
+    const users = await this.authServices.checkCredentials(user_name, password);
     res.status(users.statusCode).json(users);
+  }
+
+  @httpPost('/signout')
+  async logout(@request() req: Request, @response() res: Response, @next() next: NextFunction) {
+    res.status(HTTPCODE.OK).json(true);
   }
 }

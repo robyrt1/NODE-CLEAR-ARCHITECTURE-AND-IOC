@@ -5,7 +5,7 @@ import { USERS_IOC_IDS } from '../../../@shared/constants/IOC/users.ioc.identifi
 import { IUsersServices } from '../../../modules/users/users.services';
 import { get } from 'lodash';
 
-@controller('/users')
+@controller('/api/users')
 export class UsersController {
   constructor(
     @inject(USERS_IOC_IDS.SERVICE)
